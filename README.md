@@ -1,7 +1,7 @@
 # nonogram_solver
 A program to solve the Japanese puzzles called nonograms. See nonograms.org for examples of the puzzle. 
 
-This project depends on the SDL2 library. 
+This project depends on the SDL2 graphics library. 
 
 The code is developed in Linux Mint in the Code::Blocks IDE, but a makefile is available if you want to compile the sources without having to install Code::Blocks.
 
@@ -13,7 +13,7 @@ At the current state, the program is able to solve a very small nonogram. Some o
 
 What is possible now is to fill a row which has to be completely full. 
 
-What is at the top of the TODO-list is to let the clues in the first row, first column, and third column deduce that their blocks have been colorized. That is not useful in this case, but is a must for solving larger nonograms.
+What is at the top of the TODO-list is to let the clues deduce when one of its pieces was colorized by means of another clue. That is not useful in the smallest case, and the program does well without this functionality on a 2x3 grid, but it is a must for solving larger nonograms.
 
 Next thing on the TODO-list is to implement the tactic of exploring extreme positions.
 
