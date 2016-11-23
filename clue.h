@@ -13,7 +13,7 @@ class Clue
         int length;
         int remaining;
         std::string color;
-        int** possiblePlacements;//[2][3];
+        int** possiblePlacements;
         int sketchBoard[2][3]; // Used for temporary storing and manipulation
         bool isUsedUp;
 

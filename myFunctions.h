@@ -12,6 +12,10 @@ int colorStrToInt(std::string);
 int getFreeSpace(Clue*, int, int);
 int getNrCluesInHolder(Clue** holderPtr);
 
+void cancelPossibilitiesForRow(int);
+void cancelPossibilitiesForColumn(int);
+void cancelPossibilitiesForEmptyHolders();
+
 void findCrosses();
 void printAllClues();
 void printPossible(Clue*);
@@ -20,7 +24,7 @@ void setCrossesForDisplay();
 void initPossibleLocations();
 void colorizeBlock(Clue*, int, int);
 void setOccupiedForAllBut(Clue*, int, int);
-void setOnesInHolder(Clue**, int, int, int);
+void setValueInHolder(Clue**, int, int, int, int);
 void setImpossibleAhead(Clue**, int, int, int);
 void setImpossibleBehind(Clue**, int, int, int);
 void colorizeAllFreeInRowAndZeroOthers(Clue*, int);

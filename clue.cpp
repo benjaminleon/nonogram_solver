@@ -13,7 +13,6 @@ Clue::Clue(int number, std::string colorLetter)
     {
         possiblePlacements[i] = new int[nrColumns];
     }
-
     for(int i = 0; i < nrRows; i++)
     {
         for(int j = 0; j < nrColumns;  j++)
@@ -21,6 +20,8 @@ Clue::Clue(int number, std::string colorLetter)
             *(possiblePlacements[i] + j) = 0;
         }
     }
+
+
     sketchBoard[nrRows][nrColumns] = {0};
     isUsedUp = false;
 }

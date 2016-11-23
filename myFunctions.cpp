@@ -5,15 +5,17 @@
 #include <iostream>
 #include <assert.h>
 
+// TODO: any way to return an iterable list of clue pointers? Then I wouldn't have to repeat the "for all clues"-code.
+// Seems easy in python. Perhaps the way is to return a pointer to a list with pointers ending will null. Another cool
+// idea is to send a piece of code to the "for all clues"-function. Like, for all clues, print all positions, or print their color.
 
-const int nrColumns = 3;
-const int nrRows = 2;
+const int nrColumns = 4; // I want to put these in main, but I don't
+const int nrRows = 3;   // want to include  the main file. What to do?
 
 int gBlockColor = -1; // Initialized to no color
 
 int gColorMatrix[nrRows][nrColumns]; //Initializes with 0's (white)
 int gCrossMatrix[nrRows][nrColumns];
-
 
 void printAllClues()
 {
@@ -41,7 +43,6 @@ void printAllClues()
 
         else
         {
-
             break;
         }
     }
@@ -348,14 +349,13 @@ void setOccupiedForAllBut(Clue* winningClue, int winningRow, int winningColumn)
 
 void initPossibleLocations()
 {
-    printf( "Initializing possible locations!\n" );
     for( int rowIdx = 0; rowIdx < nrRows; rowIdx++)
     {
-        Clue** currentRowPtr = allRows[rowIdx];
+        Clue** currentRowPtr = allRows[rowIdx]; // TODO: Check if currentRowPtr is null. row might be empty. Same for column
 
         int nrCluesInRow = getNrCluesInHolder(currentRowPtr);
 
-        setOnesInHolder(currentRowPtr, rowIdx, THIS_IS_A_ROW, nrCluesInRow);
+        setValueInHolder(currentRowPtr, 1, rowIdx, THIS_IS_A_ROW, nrCluesInRow);
 
         setImpossibleBehind(currentRowPtr, THIS_IS_A_ROW, rowIdx, nrCluesInRow);
         setImpossibleAhead(currentRowPtr, THIS_IS_A_ROW, rowIdx, nrCluesInRow);
@@ -368,13 +368,75 @@ void initPossibleLocations()
 
         int nrCluesInColumn = getNrCluesInHolder(currentColumnPtr);
 
-        setOnesInHolder(currentColumnPtr, columnIdx, THIS_IS_A_COLUMN, nrCluesInColumn);
+        setValueInHolder(currentColumnPtr, 1, columnIdx, THIS_IS_A_COLUMN, nrCluesInColumn);
 
         setImpossibleBehind(currentColumnPtr, THIS_IS_A_COLUMN, columnIdx, nrCluesInColumn);
         setImpossibleAhead(currentColumnPtr, THIS_IS_A_COLUMN, columnIdx, nrCluesInColumn);
     }
+}
 
-    printf( "Initializing possible locations done\n" );
+void cancelPossibilitiesForEmptyHolders() // TODO: Debug this
+{
+    for( int rowIdx = 0; rowIdx < nrRows; rowIdx++ )
+    {
+        Clue** currentRowPtr = allRows[rowIdx];
+
+        if( *currentRowPtr == NULL )
+        {
+            cancelPossibilitiesForRow( rowIdx );
+        }
+    }
+
+    for( int columnIdx = 0; columnIdx < nrColumns; columnIdx++ )
+    {
+        Clue** currentColumnPtr = allColumns[columnIdx];
+
+        if( *currentColumnPtr == NULL )
+        {
+            cancelPossibilitiesForColumn( columnIdx );
+        }
+    }
+}
+
+
+void cancelPossibilitiesForRow(int forbiddenRow) // TODO: Debug this function
+{
+    for( int columnIdx = 0; columnIdx < nrColumns; columnIdx++ )
+    {
+        Clue** currentColumnPtr = allColumns[columnIdx];
+
+        if( currentColumnPtr != NULL ) // Column might be empty
+        {
+            Clue* cluePtr = *currentColumnPtr;
+            while( cluePtr != NULL )
+            {
+                *((*cluePtr).possiblePlacements[forbiddenRow] + columnIdx) = 0;
+
+                currentColumnPtr++;
+                cluePtr = *currentColumnPtr;
+            }
+        }
+    }
+}
+
+void cancelPossibilitiesForColumn(int forbiddenColumn) // TODO: Debug this function
+{
+    for( int rowIdx = 0; rowIdx < nrRows; rowIdx++ )
+    {
+        Clue** currentRowPtr = allRows[rowIdx];
+
+        if( currentRowPtr != NULL ) // Rowmight be empty
+        {
+            Clue* cluePtr = *currentRowPtr;
+            while( cluePtr != NULL )
+            {
+                *((*cluePtr).possiblePlacements[rowIdx] + forbiddenColumn) = 0;
+
+                currentRowPtr++;
+                cluePtr = *currentRowPtr;
+            }
+        }
+    }
 }
 
 
@@ -400,7 +462,7 @@ int getNrCluesInHolder(Clue** holderPtr) // A holder is a row or a column
 
 
 
-void setOnesInHolder(Clue** holderPtr, int holderIdx, int holderType, int nrCluesInHolder) // Works fine
+void setValueInHolder(Clue** holderPtr, int value, int holderIdx, int holderType, int nrCluesInHolder) // Works fine
 {
     for(int clueIdx = 0; clueIdx < nrCluesInHolder; clueIdx++)
     {
@@ -410,7 +472,7 @@ void setOnesInHolder(Clue** holderPtr, int holderIdx, int holderType, int nrClue
         {
             for(int columnIdx = 0; columnIdx < nrColumns; columnIdx++)
             {
-                *((*currentCluePtr).possiblePlacements[holderIdx] + columnIdx) = 1;
+                *((*currentCluePtr).possiblePlacements[holderIdx] + columnIdx) = value;
             }
         }
 
@@ -418,7 +480,7 @@ void setOnesInHolder(Clue** holderPtr, int holderIdx, int holderType, int nrClue
         {
             for(int rowIdx  = 0; rowIdx < nrRows; rowIdx++)
             {
-                *((*currentCluePtr).possiblePlacements[rowIdx] + holderIdx) = 1;
+                *((*currentCluePtr).possiblePlacements[rowIdx] + holderIdx) = value;
             }
         }
     }
@@ -434,8 +496,6 @@ void setImpossibleBehind(Clue** holderPtr, int holderType, int holderIdx, int nr
     int currentLength = 0;
     int nrImpossibleBehind = 0;
 
-    //std::cout << "Number of clues in holder: " << nrCluesInHolder << std::endl;
-
     for( int clueIdx = 0; clueIdx < nrCluesInHolder; clueIdx++) // Start with the first clue
     {
         Clue* currentCluePtr = holderPtr[clueIdx];
@@ -449,9 +509,7 @@ void setImpossibleBehind(Clue** holderPtr, int holderType, int holderIdx, int nr
         }
 
         nrImpossibleBehind += behindLength;
-        //std::cout << "clue index: " << clueIdx << " color: " << currentColor << " length: " << currentLength << std::endl;
 
-        //printPossible(currentCluePtr); // Debugging
         if( holderType == THIS_IS_A_ROW )
         {
             for( int i = 0; i < nrImpossibleBehind; i++ ) // Set zeros to the left
@@ -468,13 +526,12 @@ void setImpossibleBehind(Clue** holderPtr, int holderType, int holderIdx, int nr
                 *((*currentCluePtr).possiblePlacements[i] + holderIdx) = 0;
             }
         }
-        //printPossible(currentCluePtr); // Debugging
 
         // Setup for the clue ahead
         behindLength = currentLength;
         colorBehind = currentColor;
     }
-    //std::cout << std::endl;
+
 }
 
 void setImpossibleAhead(Clue** holderPtr, int holderType, int holderIdx, int nrCluesInHolder)
@@ -499,17 +556,13 @@ void setImpossibleAhead(Clue** holderPtr, int holderType, int holderIdx, int nrC
         }
 
         nrImpossibleAhead += aheadLength;
-        //std::cout << "impossible ahead: " << nrImpossibleAhead<< std::endl;
-        //td::cout << "clue index: " << clueIdx << " current color: " << currentColor << " current length: " << currentLength << std::endl;
 
-        //printPossible(currentCluePtr); // Debugging
         if( holderType == THIS_IS_A_ROW )
         {
             for( int i = 0; i < nrImpossibleAhead; i++ ) // Set zeros to the right
             {
                 *((*currentCluePtr).possiblePlacements[holderIdx] + (nrColumns - 1 -  i) ) = 0;
             }
-
         }
 
         else
@@ -519,13 +572,11 @@ void setImpossibleAhead(Clue** holderPtr, int holderType, int holderIdx, int nrC
                 *((*currentCluePtr).possiblePlacements[nrColumns - 1 - i] + holderIdx) = 0;
             }
         }
-        //printPossible(currentCluePtr);
 
         // Setup for the clue behind
         aheadLength = currentLength;
         colorAhead = currentColor;
     }
-    //std::cout << std::endl;
 }
 
 
@@ -543,13 +594,24 @@ void printPossible(Clue* cluePtr)
     std::cout << std::endl;
 }
 
+void resetCrossMatrix()
+{
+    for( int rowIdx = 0; rowIdx < nrRows; rowIdx++ )
+    {
+         for( int columnIdx = 0; columnIdx < nrColumns; columnIdx++ )
+         {
+             gCrossMatrix[rowIdx][columnIdx] = 0;
+         }
+    }
+
+}
+
 
 void findCrosses()
 {
+    // Where it is not possible for any clue to occupy a block, the global cross matrix will be 0.
 
-    // TODO: any way to return an iterable list of clue pointers? Then I wouldn't have to repeat the "for all clues"-code
-    // Seems easy in python. Perhaps the way is to return a pointer to a list with pointers ending will null. Another cool
-    // idea is to send a piece of code to the "for all clues"-function. Like, for all clues, print all positions, or print their color.
+    resetCrossMatrix();
 
     for( int rowIdx = 0; rowIdx < nrRows; rowIdx++ ) // For clues in all rows
     {
@@ -565,7 +627,7 @@ void findCrosses()
                 {
                     for( int j = 0; j < nrColumns; j++ )
                     {
-                        gCrossMatrix[i][j] +=  *((*currentCluePtr).possiblePlacements[i] + j); // gCrossMatrix is initalized with ones
+                        gCrossMatrix[i][j] +=  *((*currentCluePtr).possiblePlacements[i] + j);
                     }
                 }
 
@@ -589,7 +651,7 @@ void findCrosses()
                 {
                     for( int j = 0; j < nrColumns; j++ )
                     {
-                        gCrossMatrix[i][j] +=  *((*currentCluePtr).possiblePlacements[i] + j); // gCrossMatrix is initalized with ones
+                        gCrossMatrix[i][j] +=  *((*currentCluePtr).possiblePlacements[i] + j);
                     }
                 }
 
@@ -598,7 +660,6 @@ void findCrosses()
             }
         }
     }
-
 }
 
 void setCrossesForDisplay()

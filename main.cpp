@@ -8,7 +8,6 @@
 #define MAIN_CPP
 
 #include <SDL2/SDL.h>
-//#include <SDL/SDL.h>
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -23,7 +22,7 @@
 Clue clue0(1, "B"); //
 Clue clue1(2, "B"); // Row clues
 Clue clue2(1, "R"); //
-Clue clue6(1, "R");
+Clue clue6(0, "Y");
 
 Clue clue3(1, "B"); //
 Clue clue4(2, "B"); // Column clues
@@ -37,10 +36,11 @@ Clue* row2[] = {NULL};
 Clue* column0[] = {&clue3, NULL};
 Clue* column1[] = {&clue4, NULL};
 Clue* column2[] = {&clue5, NULL};
+Clue* column3[] = {NULL};
 
 // Keep track of the order of the rows and columns
-Clue** allRows[] = {row0, row1, row2, NULL}; //{NULL}; //
-Clue** allColumns[] = {column0, column1, column2, NULL}; //NULL}; //
+Clue** allRows[] = {row0, row1, row2, NULL};
+Clue** allColumns[] = {column0, column1, column2, column3, NULL};
 
 
 int main( int argc, char* args[] )
@@ -61,13 +61,10 @@ int main( int argc, char* args[] )
         {
             initPossibleLocations();
 
+
             SDL_Event myEvent;
 
             bool enableMove = false;
-
-            printf( "1\n" );
-            printf( "return is: %d \n", SDL_PollEvent(&myEvent) );
-            printf( "2\n" );
 
             bool quit = false;
             while( !quit )

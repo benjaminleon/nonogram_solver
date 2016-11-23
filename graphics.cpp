@@ -64,7 +64,8 @@ int handleKeyPress(SDL_Event e, bool* enableMove)
             }
             else
             {
-
+                std::cout << "Cancelling posibilities" << std::endl;
+                cancelPossibilitiesForEmptyHolders(); // TODO: Debug here
             }
             break;
 
@@ -108,7 +109,6 @@ bool init()
     //Initialization flag
     bool success = true;
 
-    printf( "Initializing\n" );
     //Initialize SDL
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
@@ -130,8 +130,6 @@ bool init()
             gScreenSurface = SDL_GetWindowSurface( gWindow );
         }
     }
-
-    printf( "Succes: %d\n", success );
     return success;
 }
 
@@ -169,7 +167,6 @@ void close()
 
 bool loadMedia()
 {
-    printf( "loading media\n" );
     //Loading success flag
     bool success = true;
 
@@ -222,7 +219,6 @@ bool loadMedia()
         success = false;
     }
 
-    printf( "Succes: %d\n", success );
     return success;
 }
 
