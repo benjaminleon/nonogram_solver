@@ -1,5 +1,8 @@
 # nonogram_solver
 A program to solve the Japanese puzzles called nonograms. See nonograms.org for examples of the puzzle. 
+
+The code is developed in Linux Mint in the Code::Blocks IDE, but a makefile is available if you want to compile the sources without having to install Code::Blocks.
+
 In the rows and columns, clues are listed and provides information about how many, how long, and of which color the colorized adjacent blocks should have in that row or column.
 
 At the current state, the program is able to solve a very small nonogram. Some of the logic is done but there are still some implementations left for the program to be able to solve the larger nonograms.
