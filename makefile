@@ -28,7 +28,7 @@ LIB_RELEASE = $(LIB)
 LDFLAGS_RELEASE = $(LDFLAGS) -s
 OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
-OUT_RELEASE = bin/Release/nonogram
+OUT_RELEASE = runme
 
 OBJ_RELEASE = $(OBJDIR_RELEASE)/clue.o $(OBJDIR_RELEASE)/graphics.o $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/myFunctions.o
 
