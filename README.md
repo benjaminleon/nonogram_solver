@@ -1,5 +1,5 @@
 # nonogram_solver
-A program to solve the Japanese puzzles called nonograms. In the rows and columns of 2D matrix, clues are listed and provides information about how many, how long, and of which color the colorized adjacent blocks should have in that row or column. See nonograms.org for examples of the puzzle. 
+A program to solve the Japanese puzzles called nonograms. In the rows and columns of a 2D matrix, clues are listed and provides information about how many, how long, and of which color the colorized adjacent blocks should have in that row or column. See nonograms.org for examples of the puzzle. 
 
 ## Compiling and running
 

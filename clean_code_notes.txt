@@ -1,0 +1,8 @@
+From the Clean Code Cheat Sheet at http://www.planetgeek.ch/wp-content/uploads/2013/06/Clean-Code-V2.1.pdf
+
+The principle of loose coupling. The functions which changes the objects properties (like possible_placements) has to know about the data member possible_placements. It would be better to call a function within the class to handle the possible_placements. 
+
+Liksov Substitution Principle.
+"Derived classes must be substitutable for their base classes.". What does this mean? The base class would then need additional functionality?
+
+
