@@ -4,7 +4,7 @@
 Clue::Clue(int number, std::string colorLetter)
 {
     length = number;
-    remaining = number;
+    remaining = 40; // debugging. remaining = number;
 
     color = colorLetter;
 
@@ -21,12 +21,11 @@ Clue::Clue(int number, std::string colorLetter)
         }
     }
 
-
     sketchBoard[nrRows][nrColumns] = {0};
     isUsedUp = false;
 }
 
 Clue::~Clue()
 {
-    //dtor
+  // Destructor
 }

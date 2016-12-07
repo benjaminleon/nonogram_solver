@@ -42,9 +42,12 @@ Clue* column3[] = {NULL};
 Clue** allRows[] = {row0, row1, row2, NULL};
 Clue** allColumns[] = {column0, column1, column2, column3, NULL};
 
-
 int main( int argc, char* args[] )
 {
+
+    std::cout << (**allRows[0]).color << std::endl;
+    std::cout << (**allRows[0]).length << std::endl;
+    std::cout << (**allRows[0]).remaining << std::endl;
 
     //Start up SDL and create window
     if( !init() )
@@ -61,7 +64,6 @@ int main( int argc, char* args[] )
         {
             initPossibleLocations();
 
-
             SDL_Event myEvent;
 
             bool enableMove = false;
@@ -69,7 +71,6 @@ int main( int argc, char* args[] )
             bool quit = false;
             while( !quit )
             {
-
                 //Handle events on queue
                 while( SDL_PollEvent( &myEvent ) != 0 )
                 {

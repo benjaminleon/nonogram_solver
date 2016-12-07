@@ -17,13 +17,15 @@ int gBlockColor = -1; // Initialized to no color
 int gColorMatrix[nrRows][nrColumns]; //Initializes with 0's (white)
 int gCrossMatrix[nrRows][nrColumns];
 
+
+
 void printAllClues()
 {
-    int clueIdx = 0;
+  int clueIdx = 0;
 
-    for( int rowIdx = 0; rowIdx < nrRows; rowIdx++ )
+  for( int rowIdx = 0; rowIdx < nrRows; rowIdx++ )
     {
-        Clue** currentRowPtr = allRows[rowIdx];
+      Clue** currentRowPtr = allRows[rowIdx];
 
         if( currentRowPtr != NULL )
         {
@@ -32,7 +34,8 @@ void printAllClues()
             std::cout << "Row " << rowIdx << std::endl;
             while( currentCluePtr != NULL)
             {
-                std::cout << "Clue " << clueIdx << ", remaining " << (*currentCluePtr).remaining << std::endl;
+	      std::cout << "Clue " << clueIdx << ", length " << (*currentCluePtr).length <<  ", remaining " << (*currentCluePtr).remaining <<", color " << (*currentCluePtr).color << std::endl;
+
                 printPossible(currentCluePtr);
 
                 currentRowPtr++;
@@ -59,7 +62,8 @@ void printAllClues()
             std::cout << "Column " << columnIdx << std::endl;
             while( currentCluePtr != NULL)
             {
-                std::cout << "Clue " << clueIdx << ", remaining " << (*currentCluePtr).remaining << std::endl;
+	      std::cout << "Clue " << clueIdx << ", length " << (*currentCluePtr).length <<  ", remaining " << (*currentCluePtr).remaining <<", color " << (*currentCluePtr).color << std::endl;
+
                 printPossible(currentCluePtr);
 
                 currentColumnPtr++;
@@ -214,6 +218,7 @@ void colorizeAllFreeInRowAndZeroOthers(Clue* currentCluePtr, int rowIdx)
         if( *((*currentCluePtr).possiblePlacements[rowIdx] + columnIdx) == 1 )
         {
             colorizeBlock( currentCluePtr, rowIdx, columnIdx );
+
             (*currentCluePtr).remaining--;
             setOccupiedForAllBut( currentCluePtr, rowIdx, columnIdx );
         }
@@ -227,6 +232,7 @@ void colorizeAllFreeInColumnAndZeroOthers(Clue* currentCluePtr, int columnIdx)
         if( *((*currentCluePtr).possiblePlacements[rowIdx] + columnIdx) == 1 )
         {
             colorizeBlock( currentCluePtr, rowIdx, columnIdx );
+
             (*currentCluePtr).remaining--;
             setOccupiedForAllBut( currentCluePtr, rowIdx, columnIdx);
         }
