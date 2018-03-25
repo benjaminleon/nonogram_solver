@@ -1,9 +1,11 @@
 #ifndef MYFUNCTIONS_CPP
 #define MYFUNCTIONS_CPP
 
-#include "myFunctions.hpp"
 #include <iostream>
 #include <assert.h>
+
+#include "graphics.hpp"
+#include "myFunctions.hpp"
 
 // TODO: any way to return an iterable list of clue pointers? Then I wouldn't have to repeat the "for all clues"-code.
 // Seems easy in python. Perhaps the way is to return a pointer to a list with pointers ending will null. Another cool
@@ -84,7 +86,7 @@ void displayColorMatrix()
     stretchRectBackground.y = yCoord;
     stretchRectBackground.w = nrColumns*41 + 1;
     stretchRectBackground.h = nrRows*41 + 1;
-    SDL_BlitScaled( gColorSurfaces[ COLOR_SURFACE_BLACK ], NULL, gScreenSurface, &stretchRectBackground);
+    SDL_BlitScaled( gColorSurfaces[ BLACK ], NULL, gScreenSurface, &stretchRectBackground);
 
     SDL_Rect stretchRect;
     stretchRect.x = xCoord -40;
@@ -234,7 +236,6 @@ void colorizeAllFreeInColumnAndZeroOthers(Clue* currentCluePtr, int columnIdx)
 }
 
 
-
 void colorizeBlock(Clue* currentCluePtr, int rowIdx, int columnIdx)
 {
     gColorMatrix[rowIdx][columnIdx] = colorStrToInt( (*currentCluePtr).color );
@@ -256,7 +257,6 @@ int getFreeSpace(Clue* cluePtr, int holderIdx, int holderType)
             }
         }
     }
-
     else
     {
         int holderLength = nrRows;
@@ -271,28 +271,27 @@ int getFreeSpace(Clue* cluePtr, int holderIdx, int holderType)
     return freeSpace;
 }
 
-
 int colorStrToInt(std::string color)
 {
     if( color == "R")
     {
-        return 1;
+        return RED;
     }
     else if( color == "G")
     {
-        return 2;
+        return GREEN;
     }
     else if( color == "B")
     {
-        return 3;
+        return BLUE;
     }
     else if( color == "Y")
     {
-        return 4;
+        return YELLOW;
     }
     else if( color == "B")
     {
-        return 6;
+        return BLACK;
     }
     else
     {
@@ -670,7 +669,7 @@ void setCrossesForDisplay()
         {
             if( gCrossMatrix[rowIdx][columnIdx] == 0 ) // No color can be here
             {
-                gColorMatrix[rowIdx][columnIdx] = COLOR_SURFACE_CROSS;
+                gColorMatrix[rowIdx][columnIdx] = CROSS;
             }
         }
     }

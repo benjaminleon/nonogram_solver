@@ -17,7 +17,7 @@ SDL_Surface* loadSurface( std::string path );
 SDL_Surface* gBlackBackground = NULL;
 
 //The images that correspond to a keypress
-SDL_Surface* gColorSurfaces[ COLOR_SURFACE_BLACK ];
+SDL_Surface* gColorSurfaces[ BLACK ];
 
 // For placing the drawing of the game board on the screen
 int xCoord = 100;
@@ -147,7 +147,7 @@ SDL_Surface* loadSurface( std::string path )
 void close()
 {
     //Deallocate surfaces
-    for( int i = 0; i < COLOR_SURFACE_BLACK; ++i )
+    for( int i = 0; i < BLACK; ++i )
     {
         SDL_FreeSurface( gColorSurfaces[ i ] );
         gColorSurfaces[ i ] = NULL;
@@ -169,50 +169,50 @@ bool loadMedia()
     //Loading success flag
     bool success = true;
 
-    gColorSurfaces[ COLOR_SURFACE_WHITE ] = loadSurface( "imgs/white.bmp" );
-    if( gColorSurfaces[ COLOR_SURFACE_WHITE ] == NULL )
+    gColorSurfaces[ WHITE ] = loadSurface( "imgs/white.bmp" );
+    if( gColorSurfaces[ WHITE ] == NULL )
     {
         printf( "Failed to load red image!\n" );
         success = false;
     }
 
-    gColorSurfaces[ COLOR_SURFACE_RED ] = loadSurface( "imgs/red.bmp" );
-    if( gColorSurfaces[ COLOR_SURFACE_RED ] == NULL )
+    gColorSurfaces[ RED ] = loadSurface( "imgs/red.bmp" );
+    if( gColorSurfaces[ RED ] == NULL )
     {
         printf( "Failed to load red image!\n" );
         success = false;
     }
 
-    gColorSurfaces[ COLOR_SURFACE_GREEN ] = loadSurface( "imgs/green.bmp" );
-    if( gColorSurfaces[ COLOR_SURFACE_GREEN ] == NULL )
+    gColorSurfaces[ GREEN ] = loadSurface( "imgs/green.bmp" );
+    if( gColorSurfaces[ GREEN ] == NULL )
     {
         printf( "Failed to load green image!\n" );
         success = false;
     }
 
-    gColorSurfaces[ COLOR_SURFACE_BLUE ] = loadSurface( "imgs/blue.bmp" );
-    if( gColorSurfaces[ COLOR_SURFACE_BLUE ] == NULL )
+    gColorSurfaces[ BLUE ] = loadSurface( "imgs/blue.bmp" );
+    if( gColorSurfaces[ BLUE ] == NULL )
     {
         printf( "Failed to load blue image!\n" );
         success = false;
     }
 
-    gColorSurfaces[ COLOR_SURFACE_YELLOW ] = loadSurface( "imgs/yellow.bmp" );
-    if( gColorSurfaces[ COLOR_SURFACE_YELLOW ] == NULL )
+    gColorSurfaces[ YELLOW ] = loadSurface( "imgs/yellow.bmp" );
+    if( gColorSurfaces[ YELLOW ] == NULL )
     {
         printf( "Failed to load yellow image!\n" );
         success = false;
     }
 
-    gColorSurfaces[ COLOR_SURFACE_CROSS ] = loadSurface( "imgs/cross.bmp" );
-    if( gColorSurfaces[ COLOR_SURFACE_CROSS ] == NULL )
+    gColorSurfaces[ CROSS ] = loadSurface( "imgs/cross.bmp" );
+    if( gColorSurfaces[ CROSS ] == NULL )
     {
         printf( "Failed to load cross image!\n" );
         success = false;
     }
 
-    gColorSurfaces[ COLOR_SURFACE_BLACK ] = loadSurface( "imgs/black.bmp" );
-    if( gColorSurfaces[ COLOR_SURFACE_BLACK ] == NULL )
+    gColorSurfaces[ BLACK ] = loadSurface( "imgs/black.bmp" );
+    if( gColorSurfaces[ BLACK ] == NULL )
     {
         printf( "Failed to load black image!\n" );
         success = false;

@@ -28,5 +28,4 @@ Clue::Clue(int number, std::string colorLetter)
 
 Clue::~Clue()
 {
-    //dtor
 }

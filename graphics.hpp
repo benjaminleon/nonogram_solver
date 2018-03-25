@@ -8,15 +8,15 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-enum colors // Don't forget to change in colorStrToInt when editing this
+enum Colors // Don't forget to change in colorStrToInt when editing this
 {
-    COLOR_SURFACE_WHITE,
-    COLOR_SURFACE_RED,
-    COLOR_SURFACE_GREEN,
-    COLOR_SURFACE_BLUE,
-    COLOR_SURFACE_YELLOW,
-    COLOR_SURFACE_CROSS,
-    COLOR_SURFACE_BLACK
+    WHITE,
+    RED,
+    GREEN,
+    BLUE,
+    YELLOW,
+    CROSS,
+    BLACK
 };
 
 extern SDL_Surface* gColorSurfaces[];
