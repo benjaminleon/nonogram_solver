@@ -2,7 +2,7 @@
 #define GRAPHICS_H
 #include <string>
 #include <SDL2/SDL.h>
-#include <SDL/SDL.h>
+//#include <SDL/SDL.h>
 #include "myFunctions.h"
 
 //Screen dimension constants
