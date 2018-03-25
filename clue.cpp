@@ -1,4 +1,4 @@
-#include "clue.h"
+#include "clue.hpp"
 
 
 Clue::Clue(int number, std::string colorLetter)

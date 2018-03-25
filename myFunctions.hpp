@@ -1,12 +1,8 @@
 #ifndef MYFUNCTIONS_H
 #define MYFUNCTIONS_H
-#include "clue.h"
-#include "graphics.h"
+#include "clue.hpp"
+#include "graphics.hpp"
 #include <SDL2/SDL.h>
-// #include <SDL/SDL.h>
-
-
-
 
 int colorize();
 int colorStrToInt(std::string);

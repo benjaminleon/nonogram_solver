@@ -7,15 +7,15 @@
 #ifndef MAIN_CPP
 #define MAIN_CPP
 
+#include <assert.h>
+#include <iostream>
 #include <SDL2/SDL.h>
-//#include <SDL/SDL.h>
 #include <stdio.h>
 #include <string>
-#include <iostream>
-#include <assert.h>
-#include "clue.h"
-#include "graphics.h"
-#include "myFunctions.h"
+
+#include "clue.hpp"
+#include "graphics.hpp"
+#include "myFunctions.hpp"
 
 // TODO: When a bit is colorized in a row, try to determine which bit was colorized in the corresponding column
 

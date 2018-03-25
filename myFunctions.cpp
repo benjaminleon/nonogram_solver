@@ -1,7 +1,7 @@
 #ifndef MYFUNCTIONS_CPP
 #define MYFUNCTIONS_CPP
 
-#include "myFunctions.h"
+#include "myFunctions.hpp"
 #include <iostream>
 #include <assert.h>
 

@@ -2,8 +2,7 @@
 #define GRAPHICS_H
 #include <string>
 #include <SDL2/SDL.h>
-//#include <SDL/SDL.h>
-#include "myFunctions.h"
+#include "myFunctions.hpp"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -24,7 +23,6 @@ extern SDL_Surface* gColorSurfaces[];
 
 int handleKeyPress(SDL_Event, bool*);
 
-
 bool init();
 SDL_Surface* loadSurface( std::string path );
 void close();
@@ -32,8 +30,6 @@ bool loadMedia();
 
 extern SDL_Window* gWindow;
 extern SDL_Surface* gScreenSurface;
-
-
 
 /*
 extern int xCoord;

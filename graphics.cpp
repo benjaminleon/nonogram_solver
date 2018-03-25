@@ -1,10 +1,9 @@
 #ifndef GRAPHICS_CPP
 #define GRAPHICS_CPP
-#include "myFunctions.h"
-#include "graphics.h"
+#include "myFunctions.hpp"
+#include "graphics.hpp"
 
 #include <iostream>
-
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
