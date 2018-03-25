@@ -68,6 +68,9 @@ int main( int argc, char* args[] )
             bool enableMove = false;
 
             bool quit = false;
+
+            std::cout << "Press up arrow to find crosses - where no color may be.\n";
+            std::cout << "Press down arrow to print all possible placements for all clues in debugging purpose\n";
             while( !quit )
             {
 
